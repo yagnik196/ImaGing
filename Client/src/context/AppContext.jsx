@@ -4,10 +4,10 @@ export const AppContext = createContext();
 
 const AppContextProvider = (props) => {
     const [user, setUser] = useState(null)
-
+    const [showLogin,setShowLogin] = useState(false)
 
     const Value = {
-        user, setUser
+        user, setUser,showLogin, setShowLogin
     }
 
     return (
