@@ -1,13 +1,19 @@
 import React, { useContext } from 'react'
 import { assets, plans } from '../assets/assets'
 import { AppContext } from '../context/AppContext';
+import { motion } from 'framer-motion'
 
 const Buycredit = () => {
 
   const { user } = useContext(AppContext);
 
   return (
-    <div className='min-h-[80vh] text-center pt-14 mb-10 px-4 sm:px-10 md:px-14 lg:px-20'>
+    <motion.div 
+      initial={{ opacity: 0.2, y: 100 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 1 }}
+      className='min-h-[80vh] text-center pt-14 mb-10 px-4 sm:px-10 md:px-14 lg:px-20'
+    >
       <button className='border border-gray-400 px-10 py-2.5 rounded-full mb-6 text-neutral-600 bg-white hover:bg-neutral-50 transition-all duration-300 shadow-sm font-medium text-sm'>
         Our Plans
       </button>
@@ -15,9 +21,13 @@ const Buycredit = () => {
 
       <div className='grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto text-left px-4 md:px-0'>
         {plans.map((item, index) => (
-          <div 
+          <motion.div 
             key={index} 
-            className={`p-8 bg-white/40 backdrop-blur-md rounded-2xl border transition-all duration-500 cursor-pointer flex flex-col justify-between relative overflow-hidden shadow-sm hover:shadow-lg hover:scale-[1.03] ${
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: index * 0.2, duration: 0.8 }}
+            whileHover={{ scale: 1.03 }}
+            className={`p-8 bg-white/40 backdrop-blur-md rounded-2xl border transition-all duration-500 cursor-pointer flex flex-col justify-between relative overflow-hidden shadow-sm hover:shadow-lg ${
               item.id === 'Advanced' 
                 ? 'border-blue-500 ring-1 ring-blue-500/20 bg-white/60' 
                 : 'border-gray-200 hover:border-blue-300'
@@ -39,19 +49,23 @@ const Buycredit = () => {
                 <span className='text-3xl font-bold text-gray-900'>${item.price}</span>
                 <span className='text-gray-500 text-sm font-medium'> / {item.credits} credits</span>
               </div>
-              <button className={`w-full py-2.5 rounded-full font-medium text-sm transition-all duration-300 text-center ${
-                item.id === 'Advanced'
-                  ? 'bg-blue-600 text-white hover:bg-blue-700 shadow-md shadow-blue-500/10'
-                  : 'bg-white text-gray-700 border border-gray-300 hover:bg-gray-50'
-              }`}>
+              <motion.button 
+                whileTap={{ scale: 0.97 }}
+                whileHover={{ scale: 1.02 }}
+                className={`w-full py-2.5 rounded-full font-medium text-sm transition-all duration-300 text-center ${
+                  item.id === 'Advanced'
+                    ? 'bg-blue-600 text-white hover:bg-blue-700 shadow-md shadow-blue-500/10'
+                    : 'bg-white text-gray-700 border border-gray-300 hover:bg-gray-50'
+                }`}
+              >
                 {user ? "purchased" : "Get Started"}
-              </button>
+              </motion.button>
             </div>
-          </div>
+          </motion.div>
         ))}
       </div>
 
-    </div>
+    </motion.div>
   )
 }
 
