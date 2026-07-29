@@ -1,0 +1,22 @@
+# Transcript and logs
+transcript.txt
+
+# Python / Django
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+.venv/
+db.sqlite3
+media/
+
+# Frontend (React Client)
+Client/node_modules/
+Client/dist/
+Client/dist-ssr/
+Client/*.local
+
+# OS / Editor files
+.DS_Store
+.vscode/
+.idea/
