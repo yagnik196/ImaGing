@@ -32,7 +32,6 @@
 
 ### Backend (In Development)
 - **Framework**: [Django](https://www.djangoproject.com/) / [Django REST Framework (DRF)](https://www.django-rest-framework.org/)
-- **Database**: SQLite (Development) / PostgreSQL (Production)
 - **Payments**: Razorpay SDK
 - **AI Engine**: Text-to-Image Generation API (e.g., Stability AI / OpenAI DALL-E)
 
@@ -55,18 +54,3 @@
    ```
 4. Open your browser and navigate to `http://localhost:5173`.
 
-### Backend (Under Development)
-1. Set up a Python virtual environment:
-   ```bash
-   python -m venv venv
-   source venv/bin/activate  # On Windows: venv\Scripts\activate
-   ```
-2. Install dependencies:
-   ```bash
-   pip install django djangorestframework django-cors-headers requests razorpay python-dotenv
-   ```
-3. Run migrations and start the Django server:
-   ```bash
-   python manage.py migrate
-   python manage.py runserver
-   ```
