@@ -6,7 +6,7 @@
 
 ## 🚀 Project Status
 - **Frontend**: Fully completed and polished.
-- **Backend**: Currently in active development (migrating to/building with Django framework).
+- **Backend**: Currently in active development using Node.js & Express (replacing Django).
 
 ---
 
@@ -31,13 +31,34 @@
 - **State Management**: React Context API
 
 ### Backend (In Development)
-- **Framework**: [Django](https://www.djangoproject.com/) / [Django REST Framework (DRF)](https://www.django-rest-framework.org/)
+- **Runtime/Framework**: [Node.js](https://nodejs.org/) + [Express](https://expressjs.com/)
+- **Database**: [MongoDB](https://www.mongodb.com/) + [Mongoose](https://mongoosejs.com/)
+- **Security & Auth**: JWT (JSON Web Tokens) & [Bcrypt](https://github.com/kelektiv/node.bcrypt.js)
 - **Payments**: Razorpay SDK
-- **AI Engine**: Text-to-Image Generation API (e.g., Stability AI / OpenAI DALL-E)
+<!-- - **AI Engine**: Text-to-Image Generation API (e.g., Stability AI / Clipdrop) -->
 
 ---
 
 ## 📦 Installation & Setup
+
+### Backend
+1. Navigate to the `Server` directory:
+   ```bash
+   cd Server
+   ```
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+3. Create a `.env` file in the `Server` directory and configure the environment variables:
+   ```env
+   MONGODB_URI = "your_mongodb_connection_string"
+   JWT_SECRET = "your_jwt_secret"
+   ```
+4. Run the backend server:
+   ```bash
+   npm run server
+   ```
 
 ### Frontend
 1. Navigate to the `Client` directory:
