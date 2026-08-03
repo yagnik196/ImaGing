@@ -13,7 +13,7 @@ userRouter.post("/register", registeruser)
 userRouter.post("/login", loginuser)
 
 // {backendurl}/api/user/credits
-userRouter.post("/credits", userAuth,usercredits)
+userRouter.get("/credits", userAuth,usercredits)
 
 
 

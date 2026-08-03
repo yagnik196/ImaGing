@@ -3,11 +3,49 @@ import { assets } from '../assets/assets'
 import { useContext } from 'react'
 import { AppContext } from '../context/AppContext'
 import { motion } from 'framer-motion'
+import axios from 'axios'
+import { toast } from 'react-toastify'
 
 const Login = () => {
 
     const [state,setState] = useState("Login")
-    const {setShowLogin, setUser} = useContext(AppContext)
+    const {setShowLogin, BackendURL,settoken,setUser} = useContext(AppContext)
+    const [name,Setname] = useState("");
+    const [email,Setemail] = useState("");
+    const [password,setPassword] = useState("");
+
+    const onSubmitHandler = async (e) => {
+        e.preventDefault();
+        try {
+          if(state==="Login"){
+            const {data} = await axios.post(BackendURL + '/api/user/login', {email,password});
+            if(data.success){
+              settoken(data.token);
+              localStorage.setItem("token",data.token);
+              setUser({ name: data.name })
+              setShowLogin(false);
+            }
+            else{
+              toast.error(data.message);
+            }
+          }
+          else{
+            // Registration
+            const {data} = await axios.post(BackendURL + '/api/user/register', {name,email,password});
+            if(data.success){
+              settoken(data.token);
+              localStorage.setItem("token",data.token);
+              setUser({ name: data.name })
+              setShowLogin(false);
+            }
+            else{
+              toast.error(data.message);
+            }
+          }
+        } catch (e) {
+          toast.error(e.message || "Something went wrong");
+        }
+    }
 
     useEffect(()=>{
         document.body.style.overflow='hidden';
@@ -17,11 +55,7 @@ const Login = () => {
         }
     },[])
 
-    const onSubmitHandler = (e) => {
-        e.preventDefault();
-        setUser({ name: "Yagnik" });
-        setShowLogin(false);
-    }
+    
 
   return (
     <motion.div 
@@ -43,17 +77,17 @@ const Login = () => {
             <p className='text-sm'>{state=="Login" ? "Welcome Back! Please Sign in to continue" : "Enter your details to create an account"}</p>
             {state == 'Sign Up' && <div className='border px-6 py-2 flex items-center gap-2 rounded-full mt-5'>
                 <img src={assets.user_icon} alt=''/>
-                <input type="text" name="name" id="" placeholder='Full Name' className='outline-none text-sm'/>
+                <input type="text" name="name" id="" onChange={e=>{Setname(e.target.value)}} value={name} placeholder='Full Name' className='outline-none text-sm'/>
             </div>}
 
             <div className='border px-6 py-2 flex items-center gap-2 rounded-full mt-5'>
                 <img src={assets.email_icon} alt=''/>
-                <input type="email" name="name" id="" placeholder='Email Id' className='outline-none text-sm'/>
+                <input type="email" name="email" id="" onChange={e=>{Setemail(e.target.value)}} value={email} placeholder='Email Id' className='outline-none text-sm'/>
             </div>
 
             <div className='border px-6 py-2 flex items-center gap-2 rounded-full mt-5'>
                 <img src={assets.lock_icon} alt=''/>
-                <input type="password" name="name" id="" placeholder='Password' className='outline-none text-sm'/>
+                <input type="password" name="password" id="" onChange={e=>{setPassword(e.target.value)}} value={password} placeholder='Password' className='outline-none text-sm'/>
             </div>
 
             {state == "Login" ? <p className='text-sm text-blue-600 mt-4 cursor-pointer hover:text-blue-800'>Forgot Password?</p> : null}
