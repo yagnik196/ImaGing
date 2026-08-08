@@ -58,7 +58,7 @@ const AppContextProvider = (props) => {
         settoken("");
         setUser(null)
     }
-    const [Loading, setLoading] = useState(true);
+    const [Loading, setLoading] = useState(false);
     useEffect(() => {
         if (token) {
             load_credits();
